@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/docs/">
+    <File Path="docs/api-spec.md" />
+    <File Path="docs/architecture.md" />
+    <File Path="docs/artifacts.md" />
+    <File Path="docs/requirements.md" />
+  </Folder>
+  <Folder Name="/Элементы решения/">
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="DrivingSchool.Api/DrivingSchool.Api.csproj" />
+  <Project Path="DrivingSchool.Core/DrivingSchool.Core.csproj" />
+  <Project Path="DrivingSchool.Data/DrivingSchool.Data.csproj" />
+  <Project Path="DrivingSchool.Desktop/DrivingSchool.Desktop.csproj" />
+  <Project Path="DrivingSchool.Tests/DrivingSchool.Tests.csproj" />
+  <Project Path="DrivingSchool.UiTests/DrivingSchool.UiTests.csproj" />
+</Solution>

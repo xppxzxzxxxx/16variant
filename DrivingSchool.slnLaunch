@@ -1,0 +1,11 @@
+[
+  {
+    "Name": "Автошкола",
+    "Projects": [
+      {
+        "Path": "DrivingSchool.Desktop\\DrivingSchool.Desktop.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
