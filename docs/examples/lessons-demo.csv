@@ -1,0 +1,2 @@
+Id;StudentId;Student;Phone;Title;Address;Notes;InstructorId;Instructor;Status;Amount;ScheduledAt;ClosingReason;CreatedAt;CompletedAt;Version
+"1";"1";"Орлова, Анна";"'+79990001234";"Городской маршрут";"Ул. Лесная, 14";"";"3";"Иван";"Completed";"1850.5";"2026-11-23T17:39:00.8880610+00:00";"";"2026-11-23T17:39:00.7664788Z";"2026-11-23T17:39:01.0442421Z";"5"
