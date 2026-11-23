@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net">
+  <diagram name="classes">
+    <mxGraphModel>
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2" value="Student&#10;ФИО и телефон&#10;Электронная почта" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;fillColor=#FFFDF9;strokeColor=#976C56;fontSize=16;">
+          <mxGeometry x="33" y="89" width="235" height="129" as="geometry" />
+        </mxCell>
+        <mxCell id="3" value="PracticalLesson&#10;Ученик и инструктор&#10;Начало, сумма, статус&#10;Создание и завершение&#10;Версия записи" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;fillColor=#FFFDF9;strokeColor=#976C56;fontSize=16;">
+          <mxGeometry x="351" y="57" width="308" height="182" as="geometry" />
+        </mxCell>
+        <mxCell id="4" value="SchoolUser&#10;Логин и роль&#10;Хеш пароля" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;fillColor=#FFFDF9;strokeColor=#976C56;fontSize=16;">
+          <mxGeometry x="744" y="89" width="234" height="129" as="geometry" />
+        </mxCell>
+        <mxCell id="5" source="3" target="2" value="Много к одному" edge="1" parent="1" style="endArrow=block;strokeColor=#8B422A;fontSize=13;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="6" source="3" target="4" value="Много к одному" edge="1" parent="1" style="endArrow=block;strokeColor=#8B422A;fontSize=13;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

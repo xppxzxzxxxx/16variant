@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net">
+  <diagram name="modules">
+    <mxGraphModel>
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2" value="Desktop&#10;WPF и клиент HTTPS" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;fillColor=#FFFDF9;strokeColor=#976C56;fontSize=16;">
+          <mxGeometry x="22" y="35" width="260" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="3" value="API&#10;ASP.NET Core" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;fillColor=#FFFDF9;strokeColor=#976C56;fontSize=16;">
+          <mxGeometry x="386" y="35" width="236" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="4" value="Data&#10;EF Core и SQLite" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;fillColor=#FFFDF9;strokeColor=#976C56;fontSize=16;">
+          <mxGeometry x="733" y="35" width="252" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="5" value="Core&#10;Модель, DTO и правила" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;fillColor=#FFFDF9;strokeColor=#976C56;fontSize=16;">
+          <mxGeometry x="373" y="225" width="260" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="6" value="Tests&#10;Core и Web API" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;fillColor=#FFFDF9;strokeColor=#976C56;fontSize=16;">
+          <mxGeometry x="735" y="225" width="252" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="7" value="UiTests&#10;FlaUI" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;fillColor=#FFFDF9;strokeColor=#976C56;fontSize=16;">
+          <mxGeometry x="22" y="225" width="260" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="8" source="2" target="3" value="HTTPS" edge="1" parent="1" style="endArrow=block;strokeColor=#8B422A;fontSize=13;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9" source="3" target="4" value="Репозитории" edge="1" parent="1" style="endArrow=block;strokeColor=#8B422A;fontSize=13;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="10" source="4" target="5" value="Сущности" edge="1" parent="1" style="endArrow=block;strokeColor=#8B422A;fontSize=13;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="11" source="3" target="5" value="Контракты" edge="1" parent="1" style="endArrow=block;strokeColor=#8B422A;fontSize=13;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="12" source="6" target="5" value="xUnit" edge="1" parent="1" style="endArrow=block;strokeColor=#8B422A;fontSize=13;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="13" source="7" target="2" value="UI Automation" edge="1" parent="1" style="endArrow=block;strokeColor=#8B422A;fontSize=13;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+    tags: ['v*']
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+      - shell: pwsh
+        run: ./build.ps1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: core-api-test-results
+          path: TestResults/
+
+  publish-desktop:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build-and-test
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+      - shell: pwsh
+        run: dotnet publish DrivingSchool.Desktop/DrivingSchool.Desktop.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -o publish/DrivingSchool
+      - uses: actions/upload-artifact@v4
+        with:
+          name: DrivingSchool-win-x64
+          path: publish/DrivingSchool/

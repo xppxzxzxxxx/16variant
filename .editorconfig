@@ -1,0 +1,8 @@
+root = true
+
+[*.cs]
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+dotnet_diagnostic.CA2016.severity = warning
+dotnet_diagnostic.CA2022.severity = warning
