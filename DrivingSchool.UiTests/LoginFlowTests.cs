@@ -11,8 +11,8 @@ public sealed class LoginFlowTests
     [Theory]
     [InlineData("admin", "ADMIN", "Администратор · admin", true, true)]
     [InlineData("manager", "MANAGER", "Менеджер · manager", true, false)]
-    [InlineData("ivan", "IVAN", "Инструктор · Иван", false, false)]
-    [InlineData("pavel", "PAVEL", "Инструктор · Павел", false, false)]
+    [InlineData("nikita", "NIKITA", "Инструктор · Никита", false, false)]
+    [InlineData("sergey", "SERGEY", "Инструктор · Сергей", false, false)]
     public void LoginShowsRoleAndLogoutReturnsToLogin(string login, string account,
         string caption, bool staff, bool admin)
     {
