@@ -1,0 +1,36 @@
+<Window x:Class="DrivingSchool.Desktop.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Вход — Автошкола" Width="480" Height="545" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen" AutomationProperties.AutomationId="LoginWindow">
+  <DockPanel>
+    <Border DockPanel.Dock="Top" Background="{StaticResource Header}" Padding="24,22">
+      <StackPanel HorizontalAlignment="Center">
+        <Border Width="48" Height="48" CornerRadius="13" Background="#503127" Margin="0,0,0,10">
+          <Grid Width="26" Height="26">
+            <Path Data="M 3,24 L 9,2 M 23,24 L 17,2" Stroke="{StaticResource Copper}" StrokeThickness="2"/>
+            <Path Data="M 13,3 L 13,8 M 13,11 L 13,16 M 13,19 L 13,24" Stroke="#FFEDD8"
+                  StrokeThickness="2" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+          </Grid>
+        </Border>
+        <TextBlock Text="Автошкола" FontSize="30" FontWeight="SemiBold" Foreground="#FFF6EC"
+                   HorizontalAlignment="Center"/>
+      </StackPanel>
+    </Border>
+    <Border Background="{StaticResource Canvas}" BorderBrush="{StaticResource Line}" BorderThickness="1"
+            CornerRadius="12" Margin="48,23,48,25" Padding="25,19">
+      <StackPanel>
+        <TextBlock Text="Вход в систему" FontSize="23" FontWeight="SemiBold" Margin="0,0,0,12"/>
+        <Label Content="_Логин" Target="{Binding ElementName=Login}" Padding="0,2,0,5"/>
+        <TextBox x:Name="Login" AutomationProperties.AutomationId="LoginInput"
+                 Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}"/>
+        <Label Content="_Пароль" Target="{Binding ElementName=Password}" Padding="0,9,0,5"/>
+        <PasswordBox x:Name="Password" AutomationProperties.AutomationId="PasswordInput"/>
+        <Button x:Name="SignInButton" Content="_Войти" AutomationProperties.AutomationId="SignInButton"
+                Command="{Binding SignIn}" IsDefault="True" Style="{StaticResource PrimaryButton}" Margin="0,16,0,0"/>
+        <TextBlock AutomationProperties.AutomationId="LoginMessage" Foreground="#9D2C27" Text="{Binding Message}"
+                   TextWrapping="Wrap" Margin="0,9,0,0" MinHeight="35"/>
+      </StackPanel>
+    </Border>
+  </DockPanel>
+</Window>

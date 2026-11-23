@@ -1,0 +1,41 @@
+@baseUrl = https://localhost:7130
+
+GET {{baseUrl}}/health
+
+###
+# @name login
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{"login":"manager","password":"Auto16-manager!"}
+
+###
+GET {{baseUrl}}/api/lessons?status=Confirmed&q=город
+Authorization: Bearer {{login.response.body.$.token}}
+
+###
+GET {{baseUrl}}/api/lessons/statistics
+Authorization: Bearer {{login.response.body.$.token}}
+
+###
+POST {{baseUrl}}/api/students/import
+Authorization: Bearer {{login.response.body.$.token}}
+Content-Type: text/csv; charset=utf-8
+
+Name;Phone;Email
+Орлова Анна;+7 000 000-16-03;anna@example.test
+
+###
+GET {{baseUrl}}/api/lessons/export/json
+Authorization: Bearer {{login.response.body.$.token}}
+
+###
+POST {{baseUrl}}/api/lessons/999999/transition
+Authorization: Bearer {{login.response.body.$.token}}
+Content-Type: application/json
+
+{"status":"Confirmed","version":1}
+
+###
+POST {{baseUrl}}/api/auth/logout
+Authorization: Bearer {{login.response.body.$.token}}

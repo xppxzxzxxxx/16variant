@@ -7,7 +7,7 @@
 - **Автономный клиент Windows x64.** Распакуйте ZIP целиком в одну папку и запустите DrivingSchool.Desktop.exe.
 - **Из исходников.** Откройте DrivingSchool.slnx в Visual Studio с поддержкой .NET 10 и рабочей нагрузкой «Разработка классических приложений .NET». Выберите профиль «Автошкола» и нажмите F5. Профиль запускает WPF, который поднимает сервер на свободном порту.
 - **Из терминала Windows.** Выполните dotnet run --project DrivingSchool.Desktop.
-- **Отдельный API.** Доверяйте сертификату разработки через dotnet dev-certs https --trust. Запустите dotnet run --project DrivingSchool.Api --launch-profile https, затем используйте Swagger и requests.http. Для заполнения новой базы занятий задайте School__SeedDemo=true.
+- **Отдельный API.** Доверяйте сертификату разработки через dotnet dev-certs https --trust. Запустите dotnet run --project DrivingSchool.Api --launch-profile Local, затем используйте Swagger и requests.http. Для заполнения новой базы занятий задайте School__SeedDemo=true.
 
 | Роль | Логин | Учебный пароль |
 |---|---|---|

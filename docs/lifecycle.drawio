@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net">
+  <diagram name="lifecycle">
+    <mxGraphModel>
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2" value="Запланировано" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;fillColor=#FFFDF9;strokeColor=#976C56;fontSize=16;">
+          <mxGeometry x="35" y="45" width="240" height="76" as="geometry" />
+        </mxCell>
+        <mxCell id="3" value="Подтверждено" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;fillColor=#FFFDF9;strokeColor=#976C56;fontSize=16;">
+          <mxGeometry x="381" y="45" width="248" height="76" as="geometry" />
+        </mxCell>
+        <mxCell id="4" value="Проведено" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;fillColor=#FFFDF9;strokeColor=#976C56;fontSize=16;">
+          <mxGeometry x="736" y="45" width="237" height="76" as="geometry" />
+        </mxCell>
+        <mxCell id="5" value="Перенесено" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;fillColor=#FFFDF9;strokeColor=#976C56;fontSize=16;">
+          <mxGeometry x="94" y="234" width="245" height="76" as="geometry" />
+        </mxCell>
+        <mxCell id="6" value="Пропущено" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;fillColor=#FFFDF9;strokeColor=#976C56;fontSize=16;">
+          <mxGeometry x="558" y="234" width="245" height="76" as="geometry" />
+        </mxCell>
+        <mxCell id="7" source="2" target="3" value="Инструктор и начало" edge="1" parent="1" style="endArrow=block;strokeColor=#8B422A;fontSize=13;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8" source="3" target="4" value="Сумма и завершение" edge="1" parent="1" style="endArrow=block;strokeColor=#8B422A;fontSize=13;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9" source="2" target="5" value="Причина" edge="1" parent="1" style="endArrow=block;strokeColor=#8B422A;fontSize=13;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="10" source="3" target="5" value="Причина" edge="1" parent="1" style="endArrow=block;strokeColor=#8B422A;fontSize=13;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="11" source="2" target="6" value="Причина" edge="1" parent="1" style="endArrow=block;strokeColor=#8B422A;fontSize=13;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="12" source="3" target="6" value="Причина" edge="1" parent="1" style="endArrow=block;strokeColor=#8B422A;fontSize=13;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

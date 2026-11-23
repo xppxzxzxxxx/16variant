@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup><UserSecretsId>DrivingSchool-UP02-Variant16</UserSecretsId></PropertyGroup>
+  <PropertyGroup>
+    <UserSecretsId>DrivingSchool.Api.13variant</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../DrivingSchool.Data/DrivingSchool.Data.csproj" />
+    <ProjectReference Include="../DrivingSchool.Core/DrivingSchool.Core.csproj" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.13" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="11.0.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="10.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+  </ItemGroup>
+</Project>

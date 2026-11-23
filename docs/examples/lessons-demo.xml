@@ -1,0 +1,21 @@
+<Lessons>
+  <Lesson>
+    <Id>1</Id>
+    <StudentId>1</StudentId>
+    <Student>Орлова, Анна</Student>
+    <Phone>+79990001234</Phone>
+    <Title>Городской маршрут</Title>
+    <Address>Ул. Лесная, 14</Address>
+    <Notes>
+    </Notes>
+    <InstructorId>3</InstructorId>
+    <Instructor>Иван</Instructor>
+    <Status>Completed</Status>
+    <Amount>1850.5</Amount>
+    <ScheduledAt>2026-11-23T17:39:00.8880610+00:00</ScheduledAt>
+    <ClosingReason />
+    <CreatedAt>2026-11-23T17:39:00.7664788Z</CreatedAt>
+    <CompletedAt>2026-11-23T17:39:01.0442421Z</CompletedAt>
+    <Version>5</Version>
+  </Lesson>
+</Lessons>
