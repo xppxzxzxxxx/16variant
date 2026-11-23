@@ -39,8 +39,8 @@ public sealed partial class ApiTests
         using var anonymous = server.CreateClient();
         using var admin = await SignIn(server, "admin", TestPassword, Roles.Admin);
         using var manager = await SignIn(server, "manager", TestPassword, Roles.Manager);
-        using var first = await SignIn(server, "ivan", TestPassword, Roles.Instructor);
-        using var second = await SignIn(server, "pavel", TestPassword, Roles.Instructor);
+        using var first = await SignIn(server, "nikita", TestPassword, Roles.Instructor);
+        using var second = await SignIn(server, "sergey", TestPassword, Roles.Instructor);
 
         Assert.Equal(HttpStatusCode.Unauthorized, (await anonymous.GetAsync("/api/lessons")).StatusCode);
         Assert.Equal(4, (await Get<UserInfo[]>(admin, "/api/users")).Length);

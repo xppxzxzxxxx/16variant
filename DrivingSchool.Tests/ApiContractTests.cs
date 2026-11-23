@@ -3,6 +3,8 @@ using System.Net.Http.Json;
 using DrivingSchool.Core;
 using DrivingSchool.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
@@ -10,6 +12,37 @@ namespace DrivingSchool.Tests;
 
 public sealed partial class ApiTests
 {
+    [Fact]
+    public async Task InstructorRenamePreservesExistingLessonAssignments()
+    {
+        var directory = Directory.CreateTempSubdirectory("DrivingSchool.Upgrade.");
+        var path = Path.Combine(directory.FullName, "upgrade.db");
+        try
+        {
+            var options = new DbContextOptionsBuilder<SchoolDb>();
+            SchoolDatabase.Configure(options, path);
+            await using var db = new SchoolDb(options.Options);
+            await db.GetService<IMigrator>().MigrateAsync("20261123172303_InitialSchool");
+            Assert.True(await db.Users.AnyAsync(user => user.Login == "ivan"));
+            var student = new Student { Name = "Учебный ученик", Phone = "123" };
+            db.Lessons.AddRange(new PracticalLesson { Title = "Разворот", Address = "Площадка", Student = student, InstructorId = 3 },
+                new PracticalLesson { Title = "Парковка", Address = "Площадка", Student = student, InstructorId = 4 });
+            await db.SaveChangesAsync();
+            db.ChangeTracker.Clear();
+
+            await db.Database.MigrateAsync();
+            var assigned = await db.Lessons.OrderBy(lesson => lesson.Id)
+                .Select(lesson => lesson.Instructor!.Login).ToArrayAsync();
+            Assert.Equal(["nikita", "sergey"], assigned);
+            Assert.False(await db.Users.AnyAsync(user => user.Login == "ivan" || user.Login == "pavel"));
+        }
+        finally
+        {
+            Microsoft.Data.Sqlite.SqliteConnection.ClearAllPools();
+            directory.Delete(recursive: true);
+        }
+    }
+
     [Theory]
     [InlineData("/health", HttpStatusCode.OK)]
     [InlineData("/api/lessons", HttpStatusCode.Unauthorized)]

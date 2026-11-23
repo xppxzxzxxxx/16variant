@@ -131,8 +131,8 @@ try {
     Send-Request POST /api/auth/login 401 -Body @{login='admin'; password='invalid'} | Out-Null
     $admin = Open-Session admin (Get-DemoPassword ADMIN) Admin
     $manager = Open-Session manager (Get-DemoPassword MANAGER) Manager
-    $one = Open-Session ivan (Get-DemoPassword IVAN) Instructor
-    $two = Open-Session pavel (Get-DemoPassword PAVEL) Instructor
+    $one = Open-Session nikita (Get-DemoPassword NIKITA) Instructor
+    $two = Open-Session sergey (Get-DemoPassword SERGEY) Instructor
 
     $users = Read-Json (Send-Request GET /api/users 200 $admin)
     Confirm-Check ($users.Count -eq 4) 'четыре демо-пользователя'
@@ -140,8 +140,8 @@ try {
     Send-Request GET /api/students 403 $one | Out-Null
     Send-Request GET /api/lessons/export/csv 403 $two | Out-Null
     $instructors = Read-Json (Send-Request GET /api/users/instructors 200 $manager)
-    $instructor1 = ($instructors | Where-Object login -eq 'ivan').id
-    $instructor2 = ($instructors | Where-Object login -eq 'pavel').id
+    $instructor1 = ($instructors | Where-Object login -eq 'nikita').id
+    $instructor2 = ($instructors | Where-Object login -eq 'sergey').id
 
     $empty = Read-Json (Send-Request GET /api/lessons/statistics 200 $manager)
     Confirm-Check ($empty.total -eq 0 -and $null -eq $empty.averageDays) 'пустая БД и средний срок без деления на ноль'
