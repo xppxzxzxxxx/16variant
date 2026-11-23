@@ -1,0 +1,31 @@
+# Visual Studio and build output
+.vs/
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+*.userosscache
+
+# School data and verification output
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+logs/
+*.log
+exports/
+TestResults/
+coveragereport/
+BenchmarkDotNet.Artifacts/
+publish/
+artifacts/
+
+# User-owned documents and secrets
+*.docx
+~$*
+.env
+.env.*
+secrets.json
+*.pfx
