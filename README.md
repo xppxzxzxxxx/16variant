@@ -13,8 +13,8 @@
 |---|---|---|
 | Администратор | admin | Auto16-admin! |
 | Менеджер | manager | Auto16-manager! |
-| Инструктор Иван | ivan | Auto16-ivan! |
-| Инструктор Павел | pavel | Auto16-pavel! |
+| Инструктор Никита | nikita | Auto16-nikita! |
+| Инструктор Сергей | sergey | Auto16-sergey! |
 
 База и журналы по умолчанию находятся в %LOCALAPPDATA%/DrivingSchool. Настройка School__Database задаёт отдельный файл SQLite. Демоданные и пользователи предназначены для локальной учебной среды.
 
