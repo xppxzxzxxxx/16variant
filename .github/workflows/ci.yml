@@ -33,6 +33,16 @@ jobs:
       - uses: actions/setup-dotnet@v5
         with:
           dotnet-version: ${{ matrix.sdk }}
+      - name: Select the installed SDK for this job
+        shell: pwsh
+        run: |
+          $sdk = (dotnet --list-sdks | ForEach-Object { ($_ -split ' ')[0] } |
+            Where-Object { $_ -match '^${{ matrix.framework }}[.]0[.]\d+$' } |
+            Sort-Object { [version]$_ } -Descending | Select-Object -First 1)
+          if (!$sdk) { throw 'Required SDK was not installed' }
+          @{ sdk = @{ version = $sdk; rollForward = 'disable' } } |
+            ConvertTo-Json -Compress | Set-Content global.json
+          dotnet --version
       - shell: pwsh
         run: ./build.ps1 ${{ matrix.args }}
       - uses: actions/upload-artifact@v4

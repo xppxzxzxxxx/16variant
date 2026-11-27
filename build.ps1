@@ -2,7 +2,7 @@
 param([switch]$Ui, [switch]$Legacy)
 
 $ErrorActionPreference = 'Stop'
-$properties = if ($Legacy) { @('-p:SchoolLegacy=true') } else { @() }
+[string[]]$properties = if ($Legacy) { @('-p:SchoolLegacy=true') } else { @() }
 Push-Location -LiteralPath $PSScriptRoot
 try {
     dotnet restore DrivingSchool.sln @properties
