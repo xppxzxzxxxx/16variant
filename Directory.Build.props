@@ -1,8 +1,19 @@
 <Project>
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+    <SchoolLegacy Condition="'$(SchoolLegacy)' == '' and '$(BuildingInsideVisualStudio)' == 'true' and '$(VisualStudioVersion)' == '17.0'">true</SchoolLegacy>
+    <SchoolFramework Condition="'$(SchoolLegacy)' != 'true'">net10.0</SchoolFramework>
+    <SchoolFramework Condition="'$(SchoolLegacy)' == 'true'">net8.0</SchoolFramework>
+    <TargetFramework>$(SchoolFramework)</TargetFramework>
+    <MicrosoftStackVersion Condition="'$(SchoolLegacy)' != 'true'">10.0.13</MicrosoftStackVersion>
+    <MicrosoftStackVersion Condition="'$(SchoolLegacy)' == 'true'">8.0.34</MicrosoftStackVersion>
+    <SerilogVersion Condition="'$(SchoolLegacy)' != 'true'">10.0.0</SerilogVersion>
+    <SerilogVersion Condition="'$(SchoolLegacy)' == 'true'">8.0.3</SerilogVersion>
+    <SwaggerVersion Condition="'$(SchoolLegacy)' != 'true'">11.0.1</SwaggerVersion>
+    <SwaggerVersion Condition="'$(SchoolLegacy)' == 'true'">6.6.2</SwaggerVersion>
+    <TestSdkVersion Condition="'$(SchoolLegacy)' != 'true'">18.0.1</TestSdkVersion>
+    <TestSdkVersion Condition="'$(SchoolLegacy)' == 'true'">17.11.1</TestSdkVersion>
     <Product>DrivingSchool</Product>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>

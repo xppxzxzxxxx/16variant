@@ -2,7 +2,7 @@
 
 | Артефакт | Назначение |
 |---|---|
-| DrivingSchool.slnx, .slnLaunch, *.csproj | Решение, зависимости и профиль F5 |
+| DrivingSchool.sln, DrivingSchool.slnx, .slnLaunch, *.csproj | Решение, зависимости и профиль F5 |
 | DrivingSchool.Data/Migrations | Версия схемы SQLite |
 | docs/*.drawio, docs/*.png | Исходники и изображения диаграмм |
 | requests.http, Smoke-Api.ps1 | Запросы IDE и автоматический прогон живого HTTPS |

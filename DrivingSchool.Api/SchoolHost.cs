@@ -12,7 +12,11 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.IdentityModel.Tokens;
+#if NET8_0
+using Microsoft.OpenApi.Models;
+#else
 using Microsoft.OpenApi;
+#endif
 using Serilog;
 
 namespace DrivingSchool.Api;
@@ -47,9 +51,7 @@ public static class SchoolHost
             throw new InvalidOperationException("Jwt:Key должен содержать не менее 32 байтов.");
 
         var path = DatabasePath(builder.Configuration);
-        bool seedDemo = builder.Configuration.GetValue<bool?>("School:SeedDemo") ??
-            (desktopCertificate is not null && builder.Configuration["School:Database"] is null);
-        builder.Services.AddDbContext<SchoolDb>(options => SchoolDatabase.Configure(options, path, seedDemo));
+        builder.Services.AddDbContext<SchoolDb>(options => SchoolDatabase.Configure(options, path));
         builder.Services.AddScoped<SchoolStore>();
         builder.Services.AddScoped<ILessonRepository>(services => services.GetRequiredService<SchoolStore>());
         builder.Services.AddScoped<IStudentRepository>(services => services.GetRequiredService<SchoolStore>());
@@ -66,10 +68,17 @@ public static class SchoolHost
             {
                 Type = SecuritySchemeType.Http, Scheme = "bearer", BearerFormat = "JWT"
             });
+#if NET8_0
+            options.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                [new OpenApiSecurityScheme { Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = bearer } }] = []
+            });
+#else
             options.AddSecurityRequirement(document => new OpenApiSecurityRequirement
             {
                 [new OpenApiSecuritySchemeReference(bearer, document)] = []
             });
+#endif
         });
         builder.Services.AddControllers().AddJsonOptions(options =>
         {
@@ -151,11 +160,12 @@ public static class SchoolHost
         return app;
     }
 
-    public static async Task Initialize(WebApplication app)
+    public static async Task Initialize(WebApplication app, bool embedded = false)
     {
         await using var scope = app.Services.CreateAsyncScope();
         await SchoolDatabase.Initialize(scope.ServiceProvider.GetRequiredService<SchoolDb>(),
-            DatabasePath(app.Configuration));
+            DatabasePath(app.Configuration), app.Configuration.GetValue<bool?>("School:SeedDemo") ??
+                (embedded && app.Configuration["School:Database"] is null));
     }
 
     private static string DatabasePath(IConfiguration config) =>

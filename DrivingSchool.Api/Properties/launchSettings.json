@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "Local": {
+    "Только HTTPS API": {
       "commandName": "Project",
       "applicationUrl": "https://localhost:7130",
       "environmentVariables": {
