@@ -13,19 +13,42 @@ permissions:
 
 jobs:
   build-and-test:
-    runs-on: windows-latest
+    name: Build and test (.NET ${{ matrix.framework }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - framework: '10'
+            os: windows-latest
+            sdk: '10.0.x'
+            args: ''
+          - framework: '8'
+            os: windows-2022
+            sdk: '8.0.x'
+            args: '-Legacy'
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: '10.0.x'
+          dotnet-version: ${{ matrix.sdk }}
+      - name: Select the installed SDK for this job
+        shell: pwsh
+        run: |
+          $sdk = (dotnet --list-sdks | ForEach-Object { ($_ -split ' ')[0] } |
+            Where-Object { $_ -match '^${{ matrix.framework }}[.]0[.]\d+$' } |
+            Sort-Object { [version]$_ } -Descending | Select-Object -First 1)
+          if (!$sdk) { throw 'Required SDK was not installed' }
+          @{ sdk = @{ version = $sdk; rollForward = 'disable' } } |
+            ConvertTo-Json -Compress | Set-Content global.json
+          dotnet --version
       - shell: pwsh
-        run: ./build.ps1
+        run: ./build.ps1 ${{ matrix.args }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: core-api-test-results
+          name: core-api-test-results-net${{ matrix.framework }}
           path: TestResults/
 
   publish-desktop:

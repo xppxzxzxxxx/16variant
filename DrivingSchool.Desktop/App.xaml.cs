@@ -29,7 +29,7 @@ public partial class App : Application
         certificate = LoopbackCertificate.Create();
         var expected = certificate.GetCertHash(HashAlgorithmName.SHA256);
         host = SchoolHost.Build([], certificate);
-        await SchoolHost.Initialize(host);
+        await SchoolHost.Initialize(host, embedded: true);
         await host.StartAsync();
         var transport = new HttpClientHandler
         {
