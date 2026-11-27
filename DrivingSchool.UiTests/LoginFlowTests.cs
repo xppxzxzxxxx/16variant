@@ -129,7 +129,7 @@ public sealed class LoginFlowTests
                 root = root.Parent;
             var executable = Environment.GetEnvironmentVariable("SCHOOL_UI_EXECUTABLE") ??
                 Path.Combine(root?.FullName ?? throw new InvalidOperationException("Решение не найдено."),
-                "DrivingSchool.Desktop", "bin", testOutput.Parent!.Name, "net10.0-windows",
+                "DrivingSchool.Desktop", "bin", testOutput.Parent!.Name, testOutput.Name,
                 "DrivingSchool.Desktop.exe");
             var start = new ProcessStartInfo(executable)
             {

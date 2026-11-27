@@ -25,7 +25,11 @@ public static class LoopbackCertificate
         try
         {
             // Schannel needs an imported private-key handle for the server certificate.
+#if NET8_0
+            return new X509Certificate2(pfx, password, X509KeyStorageFlags.DefaultKeySet);
+#else
             return X509CertificateLoader.LoadPkcs12(pfx, password, X509KeyStorageFlags.DefaultKeySet);
+#endif
         }
         finally
         {

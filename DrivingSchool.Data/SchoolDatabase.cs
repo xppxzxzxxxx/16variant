@@ -12,7 +12,7 @@ public static class SchoolDatabase
         Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
         "DrivingSchool", "school.db");
 
-    public static void Configure(DbContextOptionsBuilder options, string path, bool seedDemo = false)
+    public static void Configure(DbContextOptionsBuilder options, string path)
     {
         var connectionString = new SqliteConnectionStringBuilder
         {
@@ -21,14 +21,18 @@ public static class SchoolDatabase
             DefaultTimeout = 10
         }.ToString();
         options.UseSqlite(connectionString).AddInterceptors(new SearchFunctions());
-        if (seedDemo)
-            options.UseAsyncSeeding((db, _, ct) => SchoolDemo.Seed(db, ct));
     }
 
-    public static async Task Initialize(SchoolDb db, string path, CancellationToken ct = default)
+    public static async Task Initialize(SchoolDb db, string path, bool seedDemo = false, CancellationToken ct = default)
     {
         Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(path))!);
         await db.Database.MigrateAsync(ct);
+        if (!seedDemo)
+            return;
+
+        await using var transaction = await db.Database.BeginTransactionAsync(ct);
+        await SchoolDemo.Seed(db, ct);
+        await transaction.CommitAsync(ct);
     }
 
     public static string Hash(string password, string salt) => Convert.ToHexString(
@@ -39,15 +43,17 @@ public static class SchoolDatabase
         var separator = passwordHash.IndexOf(':');
         if (separator != 32 || passwordHash.Length != 97)
             return false;
-        Span<byte> salt = stackalloc byte[16];
-        Span<byte> expected = stackalloc byte[32];
-        var value = passwordHash.AsSpan();
-        if (Convert.FromHexString(value[..separator], salt, out _, out _) != System.Buffers.OperationStatus.Done ||
-            Convert.FromHexString(value[(separator + 1)..], expected, out _, out _) != System.Buffers.OperationStatus.Done)
+        try
+        {
+            var salt = Convert.FromHexString(passwordHash.AsSpan(0, separator));
+            var expected = Convert.FromHexString(passwordHash.AsSpan(separator + 1));
+            var actual = Rfc2898DeriveBytes.Pbkdf2(password, salt, 210_000, HashAlgorithmName.SHA256, 32);
+            return CryptographicOperations.FixedTimeEquals(actual, expected);
+        }
+        catch (FormatException)
+        {
             return false;
-        Span<byte> actual = stackalloc byte[32];
-        Rfc2898DeriveBytes.Pbkdf2(password, salt, actual, 210_000, HashAlgorithmName.SHA256);
-        return CryptographicOperations.FixedTimeEquals(actual, expected);
+        }
     }
 
     private sealed class SearchFunctions : Microsoft.EntityFrameworkCore.Diagnostics.DbConnectionInterceptor

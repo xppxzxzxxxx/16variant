@@ -1,9 +1,10 @@
 #requires -Version 7.4
 [CmdletBinding()]
-param([string]$ExampleDirectory)
+param([string]$ExampleDirectory, [switch]$Legacy)
 
 $ErrorActionPreference = 'Stop'
-$api = Join-Path $PSScriptRoot 'DrivingSchool.Api/bin/Release/net10.0/DrivingSchool.Api.dll'
+$framework = if ($Legacy) { 'net8.0' } else { 'net10.0' }
+$api = Join-Path $PSScriptRoot "DrivingSchool.Api/bin/Release/$framework/DrivingSchool.Api.dll"
 if (-not (Test-Path -LiteralPath $api -PathType Leaf)) {
     throw 'Сначала соберите решение в конфигурации Release.'
 }
